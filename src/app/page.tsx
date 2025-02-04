@@ -1,11 +1,11 @@
 import BackgroundPhoto from "./components/Background";
-import Header from "./components/Header";
+import Upcoming from "./components/Upcoming";
 
 export default function Home() {
   return (
     <div>
-      <Header />
       <BackgroundPhoto />
+      <Upcoming />
     </div>
   );
 }

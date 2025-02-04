@@ -5,6 +5,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { genreType, token } from "../Util";
+import Link from "next/link";
 
 export async function PopoverDemo() {
   const response = await fetch(
@@ -32,12 +33,14 @@ export async function PopoverDemo() {
         <div className="flex flex-wrap gap-[20px] pt-[15px]">
           {data.genres.map((genre: genreType, index: number) => {
             return (
-              <button
-                className="border-[1px] border-secondary rounded-xl cursor-pointer py-[2px] px-[10px] text-[14px] text-secondary"
-                key={index}
-              >
-                {genre.name}
-              </button>
+              <Link href={`/genreLink/${genre.id}`}>
+                <button
+                  className="border-[1px] border-secondary rounded-xl cursor-pointer py-[2px] px-[10px] text-[14px] text-secondary"
+                  key={index}
+                >
+                  {genre.name}
+                </button>
+              </Link>
             );
           })}
         </div>
