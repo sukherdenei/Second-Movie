@@ -2,6 +2,7 @@ import { Bold, Italic, Underline } from "lucide-react";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { MovieType, token } from "../Util";
+import { Button } from "@/components/ui/button";
 
 export async function ToggleGroupDemo() {
   const response = await fetch(
@@ -18,9 +19,9 @@ export async function ToggleGroupDemo() {
 
   return (
     <ToggleGroup type="multiple">
-      {/* {genreNames?.map((genre: MovieType, index: number) => {
-        return <button key={index}>{genre.genres.genres.name}</button>;
-      })} */}
+      {genreNames.genres.map((genre: MovieType, index: number) => {
+        return <Button key={index}>{genre.name}</Button>;
+      })}
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <Bold className="h-4 w-4" />
       </ToggleGroupItem>
