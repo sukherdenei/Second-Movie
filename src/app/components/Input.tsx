@@ -19,7 +19,7 @@ export default function Input() {
     const response = await fetchInputs(
       `/search/movie?query=${search}&language=en-US&page=${1}`
     );
-    // console.log(response);
+
     setValue(response.results || []);
   };
   const clickHandler = () => {
@@ -39,8 +39,7 @@ export default function Input() {
         <div className="absolute top-[40px]">
           {value.slice(0, 5).map((movie: MovieType, index: number) => {
             return (
-              <div key={index} className="flex flex-col w-full">
-                {/* onClick={setSearch("")} */}
+              <div key={index} className="flex flex-col w-full z-50 relative">
                 <Link
                   href={`/cardinfo/${movie.id}`}
                   onClick={() => clickHandler()}

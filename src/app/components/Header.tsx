@@ -1,5 +1,6 @@
 import Input from "./Input";
 import { PopoverDemo } from "./Popever-genre-list";
+import { ModeToggle } from "./Theme";
 
 const Header = () => {
   return (
@@ -8,8 +9,8 @@ const Header = () => {
       <div className="flex items-center">
         <PopoverDemo />
         <Input />
+        <ModeToggle />
       </div>
-      {/* <ThemeProvider /> */}
     </div>
   );
 };

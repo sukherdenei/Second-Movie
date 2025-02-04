@@ -17,14 +17,14 @@ export async function PopoverDemo() {
     }
   );
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline">Genre</Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[650px] flex flex-wrap secondary">
+      <PopoverContent className="w-[600px] flex flex-wrap secondary">
         <div className="w-[100%] text-secondary border-b-[1px] pb-[15px]">
           <h2>Genre</h2>
           <p>See list of moves by genre</p>
