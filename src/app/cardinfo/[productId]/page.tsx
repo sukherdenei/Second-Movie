@@ -1,4 +1,5 @@
-import { token } from "@/app/Util";
+import { MovieType, token } from "@/app/Util";
+import { generateKey } from "crypto";
 import Image from "next/image";
 
 export default async function CardInfo({
@@ -16,7 +17,20 @@ export default async function CardInfo({
     }
   );
   const cardDatas = await response.json();
-  console.log(cardDatas);
+  // console.log(cardDatas);
+
+  const moviePosition = await fetch(
+    `https://api.themoviedb.org/3/movie/${productId}/credits?language=en-US`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    }
+  );
+  const position = await moviePosition.json();
+  console.log(position);
+
   return (
     <div className="w-[1080px] m-auto">
       <div className="flex justify-between">
@@ -44,9 +58,29 @@ export default async function CardInfo({
           alt=""
           width={1000}
           height={1000}
-          className="h-[428px] w-[760px] rounded-lg rounded-b-lg"
+          className="h-[428px] w-[760px] rounded-lg rounded-b-lg opacity-60"
           src={"https://image.tmdb.org/t/p/original/" + cardDatas.poster_path}
         />
+      </div>
+      <div className="flex gap-9">
+        {cardDatas.genres.map((genre: MovieType, index: number) => {
+          return <button key={index}>{genre.name}</button>;
+        })}
+      </div>
+      <p>{cardDatas.overview}</p>
+      <div className="flex gap-5">
+        <p>{position.crew[0].known_for_department}</p>
+        <p>{position.crew[0].name}</p>
+      </div>
+      <div className="flex gap-5">
+        <p>Stars</p>
+        {position.cast.slice(0, 5).map((star: MovieType, index: number) => {
+          return <p key={index}>{star.name}</p>;
+        })}
+      </div>
+      <div className="flex justify-between">
+        <h1>More like this</h1>
+        <p>See more</p>
       </div>
     </div>
   );
