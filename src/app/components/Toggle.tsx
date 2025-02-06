@@ -1,8 +1,6 @@
-import { Bold, Italic, Underline } from "lucide-react";
+// import { Bold, Italic, Underline } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { MovieType, token } from "../Util";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export async function ToggleGroupDemo() {
   const response = await fetch(
@@ -15,7 +13,7 @@ export async function ToggleGroupDemo() {
     }
   );
   const genreNames = await response.json();
-  // console.log(genreNames);
+  console.log(genreNames);
 
   return (
     <ToggleGroup type="multiple" className="flex">
@@ -36,12 +34,13 @@ export async function ToggleGroupDemo() {
           );
         })}
       </div>
-      {/* <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <Italic className="h-4 w-4" />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="strikethrough" aria-label="Toggle strikethrough">
-        <Underline className="h-4 w-4" />
-      </ToggleGroupItem> */}
+      <div className="flex flex-col">
+        {genreNames.genres
+          .filter((filtered) => filtered.name.toLowerCase().includes(""))
+          .map((names: MovieType, index: number) => (
+            <button key={index}>{names.name}</button>
+          ))}
+      </div>
     </ToggleGroup>
   );
 }

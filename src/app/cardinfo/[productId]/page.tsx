@@ -29,7 +29,14 @@ export default async function CardInfo({
     }
   );
   const position = await moviePosition.json();
-  console.log(position);
+  // console.log(position);
+
+  const filtered = position.crew
+    .filter((crew: MovieType) => crew.job.toLowerCase().includes("direct"))
+    .slice(0, 1)
+    .map((directer: MovieType, index: number) => (
+      <p key={index}>{directer.name}</p>
+    ));
 
   return (
     <div className="w-[1080px] m-auto">
@@ -70,7 +77,13 @@ export default async function CardInfo({
       <p>{cardDatas.overview}</p>
       <div className="flex gap-5">
         <p>{position.crew[0].known_for_department}</p>
-        <p>{position.crew[0].name}</p>
+        {/* <h5>{filtered}</h5> */}
+        {/* {position.crew
+          .filter((crews) => crews.job.toLowerCase().includes("direct"))
+          .slice(0, 1)
+          .map((job: MovieType, index: number) => (
+            <h5 key={index}>{job.name}</h5>
+          ))} */}
       </div>
       <div className="flex gap-5">
         <p>Stars</p>
