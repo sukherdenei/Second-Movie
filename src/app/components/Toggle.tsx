@@ -13,7 +13,11 @@ export async function ToggleGroupDemo() {
     }
   );
   const genreNames = await response.json();
-  console.log(genreNames);
+  // console.log(genreNames);
+
+  // const onValueChange = (values: string[]) => {
+  //   console.log(values);
+  // };
 
   return (
     <ToggleGroup type="multiple" className="flex">

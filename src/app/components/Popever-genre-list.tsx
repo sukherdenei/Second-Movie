@@ -33,11 +33,8 @@ export async function PopoverDemo() {
         <div className="flex flex-wrap gap-[20px] pt-[15px]">
           {data.genres.map((genre: genreType, index: number) => {
             return (
-              <Link href={`/genreLink/${genre.id}`}>
-                <button
-                  className="border-[1px] border-secondary rounded-xl cursor-pointer py-[2px] px-[10px] text-[14px] text-secondary"
-                  key={index}
-                >
+              <Link key={index} href={`/genreLink/${genre.id}`}>
+                <button className="border-[1px] border-secondary rounded-xl cursor-pointer py-[2px] px-[10px] text-[14px] text-secondary">
                   {genre.name}
                 </button>
               </Link>
