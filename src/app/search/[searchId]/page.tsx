@@ -1,6 +1,5 @@
 import { ToggleGroupDemo } from "@/app/components/Toggle";
 import { MovieType, token } from "@/app/Util";
-import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,12 +25,12 @@ export default async function SearchPage({
       <div>
         <div className="pb-8">
           <h1 className="font-[30px]">Search results</h1>
-          <p>Results for ""</p>
+          <p>Results for {data.total_results}</p>
         </div>
         <div className="flex flex-wrap justify-between  gap-[8px]">
           {data.results.map((card: MovieType, index: number) => {
             return (
-              <Card key={index} className="w-[165px] h-[331px] rounded-b-lg">
+              <div key={index} className="w-[165px] h-[331px] rounded-b-lg">
                 <Link href={`/cardinfo/${card.id}`}>
                   <Image
                     alt=""
@@ -46,12 +45,12 @@ export default async function SearchPage({
                   <p>{card.vote_average.toFixed(1)}/10</p>
                 </div>
                 <p>{card.original_title}</p>
-              </Card>
+              </div>
             );
           })}
         </div>
       </div>
-      <div className="">
+      <div>
         <ToggleGroupDemo />
       </div>
     </div>

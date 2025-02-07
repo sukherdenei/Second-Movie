@@ -24,8 +24,8 @@ export default async function Upcoming() {
       <div className="flex flex-wrap gap-[31px]">
         {data.results.slice(0, 10).map((pics: MovieType, index: number) => {
           return (
-            <div className="rounded-b-xl">
-              <Card key={index} className="h-[439px] w-[230px] flex flex-wrap">
+            <div key={index} className="rounded-b-xl">
+              <div key={index} className="h-[439px] w-[230px] flex flex-wrap">
                 <Link href={`/cardinfo/${pics.id}`}>
                   <Image
                     width={1000}
@@ -48,7 +48,7 @@ export default async function Upcoming() {
                     <p>{pics.original_title}</p>
                   </div>
                 </Link>
-              </Card>
+              </div>
             </div>
           );
         })}

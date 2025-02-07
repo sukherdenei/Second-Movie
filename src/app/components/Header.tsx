@@ -1,8 +1,8 @@
-import { ModeToggle } from "@/util/theme";
 import Input from "./Input";
 import { PopoverDemo } from "./Popever-genre-list";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
+import { ModeToggle } from "@/util/Theme";
 
 const Header = () => {
   return (
