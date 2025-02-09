@@ -19,6 +19,7 @@ export type MovieType = {
   total_results: number;
   total_pages: number;
   titles_count: number;
+  job: string;
 };
 export type genreType = {
   id: number;
@@ -26,5 +27,6 @@ export type genreType = {
   actors: string;
   stars: string;
 };
+
 export const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMmZiMWY2ZTA2ZWI2YzE3MGJjZWI0ODUzMzY1MWJjZiIsIm5iZiI6MTczNzM0MjU0NS42MjQsInN1YiI6IjY3OGRiZTUxZDhhNWIwZDAwYzQzNGNmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dmDhnJpGWqwqyuPSu6Vaqv1Chq-b3BmRKojdw8AMHM4";

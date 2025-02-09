@@ -19,9 +19,11 @@ export default async function Upcoming() {
     <div className="flex flex-wrap w-[1280px] mx-[auto]">
       <div className="flex justify-between w-[1280px] h-[36px] items-center mb-5 mt-5">
         <h1>Upcoming</h1>
-        <p>See more</p>
+        <Link href={"/similar/similarId"}>
+          <div className="text-[14px]">See more </div>
+        </Link>
       </div>
-      <div className="flex flex-wrap gap-[31px]">
+      <div className="flex flex-wrap gap-[31px] justify-between">
         {data.results.slice(0, 10).map((pics: MovieType, index: number) => {
           return (
             <div key={index} className="rounded-b-xl">

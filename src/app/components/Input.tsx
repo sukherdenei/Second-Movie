@@ -4,6 +4,7 @@ import { MovieType } from "../Util";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import fetchInputs from "@/util/search";
+import { useRouter } from "next/navigation";
 
 export default function Input() {
   const [search, setSearch] = useState("");

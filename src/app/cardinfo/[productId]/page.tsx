@@ -1,6 +1,6 @@
 import { MovieType, token } from "@/app/Util";
-import { generateKey } from "crypto";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function CardInfo({
   params: { productId },
@@ -31,6 +31,18 @@ export default async function CardInfo({
   const position = await moviePosition.json();
   // console.log(position);
 
+  const moreLikeThis = await fetch(
+    `https://api.themoviedb.org/3/movie/${productId}/similar?language=en-US&page=1`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    }
+  );
+  const moreLikeData = await moreLikeThis.json();
+  console.log("Crew data", moreLikeData);
+
   const filtered = position.crew
     .filter((crew: MovieType) => crew.job.toLowerCase().includes("direct"))
     .slice(0, 1)
@@ -45,11 +57,11 @@ export default async function CardInfo({
           <h1>{cardDatas.original_title}</h1>
           <p>{cardDatas.release_date}</p>
         </div>
-        <div>
+        <div className="p-5">
           <h2>Rating</h2>
           <div className="flex gap-1">
             <img src="/Star.svg" alt="" />
-            <p>{cardDatas.vote_average}</p>
+            <p>{cardDatas.vote_average.toFixed(1)}</p>
           </div>
         </div>
       </div>
@@ -77,13 +89,15 @@ export default async function CardInfo({
       <p>{cardDatas.overview}</p>
       <div className="flex gap-5">
         <p>{position.crew[0].known_for_department}</p>
-        {/* <h5>{filtered}</h5> */}
-        {/* {position.crew
-          .filter((crews) => crews.job.toLowerCase().includes("direct"))
-          .slice(0, 1)
+
+        {position.crew
+          .filter((crews: MovieType) =>
+            crews.job.toLowerCase().includes("direct")
+          )
+          .slice(0, 5)
           .map((job: MovieType, index: number) => (
             <h5 key={index}>{job.name}</h5>
-          ))} */}
+          ))}
       </div>
       <div className="flex gap-5">
         <p>Stars</p>
@@ -91,9 +105,37 @@ export default async function CardInfo({
           return <p key={index}>{star.name}</p>;
         })}
       </div>
-      <div className="flex justify-between">
-        <h1>More like this</h1>
-        <p>See more</p>
+      <div className="flex flex-col">
+        <div className="flex justify-between">
+          <h1>More like this</h1>
+          <p>See more</p>
+        </div>
+        <div className="flex justify-center gap-8">
+          {moreLikeData.results
+            .slice(0, 5)
+            .map((five: MovieType, index: number) => {
+              return (
+                <Link key={index} href={`/cardinfo/${five.id}`}>
+                  <div className="mt-10">
+                    <div className="w-[190px] h-[392px] gap-8">
+                      <Image
+                        width={200}
+                        height={200}
+                        src={`https://image.tmdb.org/t/p/original${five.backdrop_path}`}
+                        alt=""
+                        className="w-[200px] h-[281px] rounded-t-lg transition-all hover:opacity-50"
+                      />
+                      <div className="flex gap-2">
+                        <img src="/Star.svg" alt="" />
+                        <p>{five.vote_average.toFixed(1)}/10</p>
+                      </div>
+                      <h3>{five.original_title}</h3>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

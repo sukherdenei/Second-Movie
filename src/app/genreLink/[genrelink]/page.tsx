@@ -1,3 +1,4 @@
+import { PopoverDemo } from "@/app/components/Popever-genre-list";
 import { ToggleGroupDemo } from "@/app/components/Toggle";
 import { MovieType, token } from "@/app/Util";
 import Image from "next/image";
@@ -18,7 +19,7 @@ export default async function genrePage({
     }
   );
   const genre = await response.json();
-  console.log("hi", genre);
+  // console.log("hi", genre);
 
   return (
     <div className="w-[1280px] m-auto mt-[52px]">
@@ -27,6 +28,9 @@ export default async function genrePage({
         <div className="w-[400px] sticky top-10">
           <h2 className="text-[24px] font-semibold ">Genres</h2>
           <p className="text-[16px] mb-[20px]">See lists of movies by genre</p>
+          <div className="mt-10">
+            <ToggleGroupDemo />
+          </div>
         </div>
         <div className="border-l-[0.5px] pl-[20px]">
           <h1 className="mb-[32px] text-[20px] flex">
@@ -37,13 +41,13 @@ export default async function genrePage({
               return (
                 <div key={index}>
                   <Link href={`/cardinfo/${genres.id}`}>
-                    <div className="w-[165px] h-[331px] border-amber-400 bg-stone-800 rounded-md overflow-hidden hover:opacity-50 transition-all ease-in">
+                    <div className="w-[165px] h-[331px] border-amber-400 bg-stone-800 rounded-md overflow-hidden ">
                       <Image
                         width={200}
                         height={200}
                         src={`https://image.tmdb.org/t/p/original/${genres.poster_path}`}
                         alt=""
-                        className="w-[165px] h-[244px] rounded-t-md"
+                        className="w-[165px] h-[244px] rounded-t-md hover:opacity-50 transition-all ease-in"
                       />
                       <div className="p-[10px]">
                         <div className="flex gap-[10px] text-[14px] items-center ">
@@ -60,7 +64,6 @@ export default async function genrePage({
           </div>
         </div>
       </div>
-      <div className="mt-10"></div>
     </div>
   );
 }
